@@ -110,11 +110,7 @@ if __name__ == '__main__':
                 param.requires_grad_(True)
             # Update discriminator
             j = 0
-            if epoch < 25:
-                dis_itr = 100
-            else:
-                dis_itr = num_critic
-            while j < dis_itr and i < len(dataloader):
+            while j < num_critic and i < len(dataloader):
                 j += 1
                 # Reset gradients
                 discriminator.zero_grad()
@@ -163,6 +159,7 @@ if __name__ == '__main__':
             error_gen = discriminator(gen_out)
             error_gen = error_gen.mean()
             error_gen.backward()
+            optim_gen.step()
             gen_itr += 1
 
             logger.error('Epoch:%d/%d Batch:%d/%d Loss_D:%.4f Loss_G:%.4f Loss_D_real:%.4f Loss_D_fake:%.4f' % (epoch, num_epoch, i, len(dataloader), error_dis.item(), error_gen.item(), error_dis_real.item(), error_dis_fake.item()))
