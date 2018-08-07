@@ -134,7 +134,7 @@ if __name__ == '__main__':
                 error_dis_fake = discriminator(input_fake)
                 error_dis_fake = error_dis_fake.mean()
 
-                error_dis = -(error_dis_real - error_dis_fake)
+                error_dis = error_dis_real - error_dis_fake
                 error_dis.backward()
 
                 optim_dis.step()
