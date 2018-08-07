@@ -5,4 +5,5 @@ python train.py --cuda \
     --data_dir="data/resized" \
     --out_dir="systemout" \
     --sample_every=500 \
+    --num_epoch=100000 \
     2> log.txt
