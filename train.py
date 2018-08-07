@@ -164,10 +164,10 @@ if __name__ == '__main__':
             logger.error('Epoch:%d/%d Batch:%d/%d Loss_D:%.4f Loss_G:%.4f Loss_D_real:%.4f Loss_D_fake:%.4f' % (epoch, num_epoch, i, len(dataloader), error_dis.item(), error_gen.item(), error_dis_real.item(), error_dis_fake.item()))
 
             if gen_itr % sample_every == 0:
-                real_sample = real_batch
-                torchvision.utils.save_image(real_sample,
-                        '%s/sample/real_epoch_%d_genitr_%d.png' % (opt.out_dir, epoch, gen_itr),
-                        normalize=True)
+                # real_sample = real_batch
+                # torchvision.utils.save_image(real_sample,
+                #         '%s/sample/real_epoch_%d_genitr_%d.png' % (opt.out_dir, epoch, gen_itr),
+                #         normalize=True)
                 fake_sample = generator(fixed_noise)
                 torchvision.utils.save_image(fake_sample.detach(),
                         '%s/sample/fake_epoch_%d_genitr_%d.png' % (opt.out_dir, epoch, gen_itr),
