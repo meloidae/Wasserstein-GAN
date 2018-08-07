@@ -110,7 +110,11 @@ if __name__ == '__main__':
                 param.requires_grad_(True)
             # Update discriminator
             j = 0
-            while j < num_critic and i < len(dataloader):
+            if epoch < 25:
+                dis_itr = 100
+            else:
+                dis_itr = num_critic
+            while j < dis_itr and i < len(dataloader):
                 j += 1
                 # Reset gradients
                 discriminator.zero_grad()
