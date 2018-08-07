@@ -149,7 +149,7 @@ if __name__ == '__main__':
             # Reset gradients
             generator.zero_grad()
             # Train generator
-            input_noise = torch.randn(batch_size, z_size, 1, 1, requires_grad=True)
+            input_noise = torch.randn(batch_size, z_size, 1, 1, requires_grad=True).to(device)
             gen_out = generator(input_noise)
             error_gen = discriminator(gen_out)
             error_gen = error_gen.mean()
