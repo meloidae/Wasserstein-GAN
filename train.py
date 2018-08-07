@@ -143,6 +143,8 @@ if __name__ == '__main__':
                 for param in discriminator.parameters():
                     param.data.clamp_(-clip_val, clip_val)
                 
+                logger.error('test Epoch:%d/%d Batch:%d/%d Loss_D:%.4f Loss_D_real:%.4f Loss_D_fake:%.4f' % (epoch, num_epoch, i, len(dataloader), error_dis.item(), error_dis_real.item(), error_dis_fake.item()))
+                
 
             # Update generator
             # Freeze discriminator
@@ -155,7 +157,7 @@ if __name__ == '__main__':
             input_noise = torch.randn(batch_size, z_size, 1, 1, requires_grad=True).to(device)
             gen_out = generator(input_noise)
             error_gen = discriminator(gen_out)
-            error_gen = error_gen.mean()
+            error_gen = -error_gen.mean()
             error_gen.backward()
             gen_itr += 1
 
