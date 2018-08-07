@@ -128,7 +128,7 @@ if __name__ == '__main__':
                 
                 # Train discriminator with ouput of generator
                 noise = torch.randn(batch_size, z_size, 1, 1).to(device)
-                fake_batch = generator(noise.detech())
+                fake_batch = generator(noise.detach())
                 input_fake = fake_batch.new_tensor(fake_batch, requires_grad=True)
                 
                 error_dis_fake = discriminator(input_fake)
