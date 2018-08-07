@@ -175,7 +175,7 @@ if __name__ == '__main__':
 
 
         # Check point
-        if epoch % save_every: 
+        if epoch % save_every == 0: 
             torch.save(generator.state_dict(), '%s/gen_epoch_%d.model' % (opt.out_dir, epoch))
             torch.save(discriminator.state_dict(), '%s/dis_epoch_%d.model' % (opt.out_dir, epoch))
 
