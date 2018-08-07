@@ -143,7 +143,7 @@ if __name__ == '__main__':
                 for param in discriminator.parameters():
                     param.data.clamp_(-clip_val, clip_val)
                 
-                logger.error('test Epoch:%d/%d Batch:%d/%d Loss_D:%.4f Loss_D_real:%.4f Loss_D_fake:%.4f' % (epoch, num_epoch, i, len(dataloader), error_dis.item(), error_dis_real.item(), error_dis_fake.item()))
+                #logger.error('test Epoch:%d/%d Batch:%d/%d Loss_D:%.4f Loss_D_real:%.4f Loss_D_fake:%.4f' % (epoch, num_epoch, i, len(dataloader), error_dis.item(), error_dis_real.item(), error_dis_fake.item()))
                 
 
             # Update generator
