@@ -30,6 +30,7 @@ parser.add_argument('--data_dir', default='')
 parser.add_argument('--out_dir', default='wgan')
 parser.add_argument('--seed', type=int)
 parser.add_argument('--sample_every', type=int, default=500)
+parser.add_argument('--save_every', type=int, default=100)
 
 opt = parser.parse_args()
 logger.error(opt)
@@ -47,6 +48,8 @@ leak_val = float(opt.leak)
 num_critic = int(opt.num_critic)
 num_workers = int(opt.num_workers)
 num_channels = 3
+sample_every = int(opt.sample_every)
+save_every = int(opt.save_every)
 
 if opt.seed is None:
     seed = random.randint(1, 100000)
@@ -158,7 +161,7 @@ if __name__ == '__main__':
 
             logger.error('Epoch:%d/%d Batch:%d/%d Loss_D:%.4f Loss_G:%.4f Loss_D_real:%.4f Loss_D_fake:%.4f' % (epoch, num_epoch, i, len(dataloader), error_dis.item(), error_gen.item(), error_dis_real.item(), error_dis_fake.item()))
 
-            if gen_itr % opt.sample_every == 0:
+            if gen_itr % sample_every == 0:
                 real_sample = real_batch
                 torchvision.utils.save_image(real_sample,
                         '%s/sample/real_epoch_%d_genitr_%d.png' % (opt.out_dir, epoch, gen_itr),
@@ -170,7 +173,8 @@ if __name__ == '__main__':
 
 
         # Check point
-        torch.save(generator.state_dict(), '%s/gen_epoch_%d.model' % (opt.out_dir, epoch))
-        torch.save(discriminator.state_dict(), '%s/dis_epoch_%d.model' % (opt.out_dir, epoch))
+        if epoch % save_every: 
+            torch.save(generator.state_dict(), '%s/gen_epoch_%d.model' % (opt.out_dir, epoch))
+            torch.save(discriminator.state_dict(), '%s/dis_epoch_%d.model' % (opt.out_dir, epoch))
 
 
