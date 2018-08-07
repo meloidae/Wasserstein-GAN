@@ -6,5 +6,5 @@ python train.py --cuda \
     --out_dir="systemout" \
     --sample_every=500 \
     --num_epoch=100000 \
-    --lr=0.1 \
+#    --lr=0.1 \
     2> log.txt

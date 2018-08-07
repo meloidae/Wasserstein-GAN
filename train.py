@@ -128,11 +128,11 @@ if __name__ == '__main__':
                 
                 # Train discriminator with ouput of generator
                 noise = torch.randn(batch_size, z_size, 1, 1).to(device)
-                fake_batch = generator(noise)
+                fake_batch = generator(noise.detech())
                 input_fake = fake_batch.new_tensor(fake_batch, requires_grad=True)
                 
                 error_dis_fake = discriminator(input_fake)
-                error_dis_fake = error_dis_real.mean()
+                error_dis_fake = error_dis_fake.mean()
 
                 error_dis = -(error_dis_real - error_dis_fake)
                 error_dis.backward()
